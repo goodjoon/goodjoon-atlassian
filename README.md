@@ -11,6 +11,18 @@ Model Context Protocol (MCP) server for Atlassian products (Confluence and Jira)
 
 This fork is published as `goodjoon-atlassian` and provides the `goodjoon-atlassian` command for `uvx` and installed environments. The original Python package namespace (`mcp_atlassian`) and `mcp-atlassian` command are retained for compatibility.
 
+Run the published command with:
+
+```bash
+uvx goodjoon-atlassian --version
+```
+
+When testing a local wheel, pass the wheel as the package source and the command separately:
+
+```bash
+uvx --from dist/goodjoon_atlassian-*.whl goodjoon-atlassian --version
+```
+
 https://github.com/user-attachments/assets/35303504-14c6-4ae4-913b-7c25ea511c3e
 
 <details>
