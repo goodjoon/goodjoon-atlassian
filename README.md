@@ -20,7 +20,9 @@ uvx goodjoon-atlassian --version
 When testing a local wheel, pass the wheel as the package source and the command separately:
 
 ```bash
-uvx --from dist/goodjoon_atlassian-*.whl goodjoon-atlassian --version
+uv build
+wheel="$(ls -t dist/goodjoon_atlassian-*-py3-none-any.whl | head -n 1)"
+uvx --from "$wheel" goodjoon-atlassian --version
 ```
 
 https://github.com/user-attachments/assets/35303504-14c6-4ae4-913b-7c25ea511c3e
