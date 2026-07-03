@@ -13,6 +13,7 @@ from requests.exceptions import HTTPError
 from mcp_atlassian.exceptions import MCPAtlassianAuthenticationError
 from mcp_atlassian.jira.constants import DEFAULT_READ_JIRA_FIELDS
 from mcp_atlassian.jira.forms_common import convert_datetime_to_timestamp
+from mcp_atlassian.jira.sprints import validate_unique_issue_keys
 from mcp_atlassian.models.jira import JiraAttachment
 from mcp_atlassian.models.jira.common import JiraUser
 from mcp_atlassian.servers.dependencies import get_jira_fetcher
@@ -2362,8 +2363,9 @@ async def add_issues_to_sprint(
     Raises:
         ValueError: If in read-only mode or Jira client unavailable.
     """
-    jira = await get_jira_fetcher(ctx)
     keys_list = [k.strip() for k in issue_keys.split(",") if k.strip()]
+    validate_unique_issue_keys(keys_list)
+    jira = await get_jira_fetcher(ctx)
     jira.add_issues_to_sprint(sprint_id, keys_list)
     result = {
         "message": f"Successfully added {len(keys_list)} issue(s) to sprint",

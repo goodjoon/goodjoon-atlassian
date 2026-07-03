@@ -2137,6 +2137,24 @@ async def test_add_issues_to_sprint_single_key(jira_client, mock_jira_fetcher):
     assert result["sprint_id"] == "200"
 
 
+@pytest.mark.anyio
+async def test_add_issues_to_sprint_rejects_duplicate_keys(
+    jira_client, mock_jira_fetcher
+):
+    """Test add_issues_to_sprint rejects duplicate issue keys before API call."""
+    with pytest.raises(ToolError) as excinfo:
+        await jira_client.call_tool(
+            "jira_add_issues_to_sprint",
+            {
+                "sprint_id": "100",
+                "issue_keys": "PROJ-1, PROJ-2, PROJ-1",
+            },
+        )
+
+    assert "Duplicate issue key(s): PROJ-1" in str(excinfo.value)
+    mock_jira_fetcher.add_issues_to_sprint.assert_not_called()
+
+
 # ============================================================================
 # Field Options Filtering Tests
 # ============================================================================

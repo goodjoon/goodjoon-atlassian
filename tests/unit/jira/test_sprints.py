@@ -352,6 +352,16 @@ def test_add_issues_to_sprint_single_key(sprints_mixin):
     )
 
 
+def test_add_issues_to_sprint_rejects_duplicate_keys(sprints_mixin):
+    """Test add_issues_to_sprint rejects duplicate issue keys before API call."""
+    sprints_mixin.jira.post.return_value = None
+
+    with pytest.raises(ValueError, match="Duplicate issue key\\(s\\): PROJ-1"):
+        sprints_mixin.add_issues_to_sprint("100", ["PROJ-1", "PROJ-2", "PROJ-1"])
+
+    sprints_mixin.jira.post.assert_not_called()
+
+
 def test_add_issues_to_sprint_multiple_keys(sprints_mixin):
     """Test add_issues_to_sprint with multiple issue keys."""
     sprints_mixin.jira.post.return_value = None

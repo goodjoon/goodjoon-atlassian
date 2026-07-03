@@ -13,6 +13,31 @@ from .client import JiraClient
 logger = logging.getLogger("mcp-jira")
 
 
+def validate_unique_issue_keys(issue_keys: list[str]) -> None:
+    """Validate issue keys do not contain duplicates.
+
+    Args:
+        issue_keys: List of Jira issue keys.
+
+    Raises:
+        ValueError: If any issue key appears more than once.
+    """
+    seen: set[str] = set()
+    duplicates: list[str] = []
+    duplicate_seen: set[str] = set()
+    for issue_key in issue_keys:
+        normalized_key = issue_key.strip().upper()
+        if normalized_key in seen and normalized_key not in duplicate_seen:
+            duplicates.append(normalized_key)
+            duplicate_seen.add(normalized_key)
+        seen.add(normalized_key)
+
+    if duplicates:
+        duplicate_keys = ", ".join(duplicates)
+        error_msg = f"Duplicate issue key(s): {duplicate_keys}"
+        raise ValueError(error_msg)
+
+
 class SprintsMixin(JiraClient):
     """Mixin for Jira sprints operations."""
 
@@ -143,6 +168,7 @@ class SprintsMixin(JiraClient):
         Raises:
             requests.HTTPError: If the API call fails.
         """
+        validate_unique_issue_keys(issue_keys)
         self.jira.post(
             f"rest/agile/1.0/sprint/{sprint_id}/issue",
             data={"issues": issue_keys},
