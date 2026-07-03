@@ -1,13 +1,15 @@
-# MCP Atlassian
+# Goodjoon Atlassian
 
-![PyPI Version](https://img.shields.io/pypi/v/mcp-atlassian)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/mcp-atlassian)
-![PePy - Total Downloads](https://static.pepy.tech/personalized-badge/mcp-atlassian?period=total&units=international_system&left_color=grey&right_color=blue&left_text=Total%20Downloads)
-[![Run Tests](https://github.com/sooperset/mcp-atlassian/actions/workflows/tests.yml/badge.svg)](https://github.com/sooperset/mcp-atlassian/actions/workflows/tests.yml)
-![License](https://img.shields.io/github/license/sooperset/mcp-atlassian)
-[![Docs](https://img.shields.io/badge/docs-mintlify-blue)](https://mcp-atlassian.soomiles.com)
+![PyPI Version](https://img.shields.io/pypi/v/goodjoon-atlassian)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/goodjoon-atlassian)
+![PePy - Total Downloads](https://static.pepy.tech/personalized-badge/goodjoon-atlassian?period=total&units=international_system&left_color=grey&right_color=blue&left_text=Total%20Downloads)
+[![Run Tests](https://github.com/goodjoon/goodjoon-atlassian/actions/workflows/tests.yml/badge.svg)](https://github.com/goodjoon/goodjoon-atlassian/actions/workflows/tests.yml)
+![License](https://img.shields.io/github/license/goodjoon/goodjoon-atlassian)
+[![Docs](https://img.shields.io/badge/docs-upstream-blue)](https://mcp-atlassian.soomiles.com)
 
 Model Context Protocol (MCP) server for Atlassian products (Confluence and Jira). Supports both Cloud and Server/Data Center deployments.
+
+This fork is published as `goodjoon-atlassian` and provides the `goodjoon-atlassian` command for `uvx` and installed environments. The original Python package namespace (`mcp_atlassian`) and `mcp-atlassian` command are retained for compatibility.
 
 https://github.com/user-attachments/assets/35303504-14c6-4ae4-913b-7c25ea511c3e
 
@@ -33,9 +35,9 @@ Add to your Claude Desktop or Cursor MCP configuration:
 ```json
 {
   "mcpServers": {
-    "mcp-atlassian": {
+    "goodjoon-atlassian": {
       "command": "uvx",
-      "args": ["mcp-atlassian"],
+      "args": ["goodjoon-atlassian"],
       "env": {
         "JIRA_URL": "https://your-company.atlassian.net",
         "JIRA_USERNAME": "your.email@company.com",
@@ -61,7 +63,7 @@ Ask your AI assistant to:
 
 ## Documentation
 
-Full documentation is available at **[mcp-atlassian.soomiles.com](https://mcp-atlassian.soomiles.com)**.
+Upstream documentation is available at **[mcp-atlassian.soomiles.com](https://mcp-atlassian.soomiles.com)**.
 
 Documentation is also available in [llms.txt format](https://llmstxt.org/), which LLMs can consume easily:
 - [`llms.txt`](https://mcp-atlassian.soomiles.com/llms.txt) — documentation sitemap

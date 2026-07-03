@@ -45,10 +45,13 @@ from mcp_atlassian.utils.lifecycle import (
 from mcp_atlassian.utils.logging import setup_logging
 
 try:
-    __version__ = version("mcp-atlassian")
+    __version__ = version("goodjoon-atlassian")
 except PackageNotFoundError:
-    # package is not installed
-    __version__ = "0.0.0"
+    try:
+        __version__ = version("mcp-atlassian")
+    except PackageNotFoundError:
+        # package is not installed
+        __version__ = "0.0.0"
 
 # Initialize logging with appropriate level
 logging_level = logging.WARNING
@@ -114,7 +117,7 @@ async def _run_stdio_with_stdin_guard(run_kwargs: dict[str, object]) -> None:
             raise server_result[0]
 
 
-@click.version_option(__version__, prog_name="mcp-atlassian")
+@click.version_option(__version__, prog_name="goodjoon-atlassian")
 @click.command()
 @click.option(
     "-v",
